@@ -2,6 +2,7 @@ import csv
 import pprint
 from statistics import variance
 
+
 def get_fingering_dict():
     # 運指表を辞書型で読み込む
     fingering_dict = {}
@@ -11,6 +12,7 @@ def get_fingering_dict():
             key, num = row[0].split('\t')
             fingering_dict[key] = num
     return fingering_dict
+
 
 def word_to_num(word):
     # 運指表を辞書型で読み込む
@@ -26,6 +28,7 @@ def word_to_num(word):
     for key in word:
         ans.append(int(fingering_dict[key]))
     return ans
+
 
 def chunking(word, num):
     chunk_word = ''
@@ -67,11 +70,13 @@ def chunking(word, num):
     # 同指打鍵の'/'でlist化して1.チャンク数が少ない方を選択2.分散が小さい方を選択3.末尾の子音が少ない方を選択
     return word_from_left, word_from_right
 
+
 def is_vowel(char):
     if char == 'a' or char == 'i' or char == 'u' or char == 'e' or char == 'o':
         return True
     else:
         return False
+
 
 def optimizing(chunk_list):
     fingering_dict = get_fingering_dict()
@@ -129,10 +134,10 @@ def optimizing(chunk_list):
             subword += chunk_list[3][i]
     re_right.append(subword)
     subword = ''
-    print(left)
-    print(right)
-    print(re_left)
-    print(re_right)
+    # print(left)
+    # print(right)
+    # print(re_left)
+    # print(re_right)
     left_point = []
     right_point = []
     re_left_point = []
@@ -230,10 +235,10 @@ def optimizing(chunk_list):
         # 番号
         re_right_point.append(3)
 
-        print(left_point)
-        print(right_point)
-        print(re_left_point)
-        print(re_right_point)
+        # print(left_point)
+        # print(right_point)
+        # print(re_left_point)
+        # print(re_right_point)
 
         point_list = []
         point_list.append(left_point)
@@ -241,7 +246,7 @@ def optimizing(chunk_list):
         point_list.append(re_left_point)
         point_list.append(re_right_point)
         point_list.sort()
-        
+
         if point_list[0][3] == 0:
             ans += '/' + left[i]
         if point_list[0][3] == 1:
@@ -258,11 +263,11 @@ def optimizing(chunk_list):
     return ans.lstrip('/')
 
 # main--------------------
-word = input()
-print(word_to_num(word))
-left, right = chunking(word, word_to_num(word))
-re_right, re_left = chunking(word[::-1], word_to_num(word[::-1]))
-chunk_list = [left, right, re_left[::-1], re_right[::-1]]
-for l in chunk_list:
-    print(l)
-print(optimizing(chunk_list))
+# word = input()
+# print(word_to_num(word))
+# left, right = chunking(word, word_to_num(word))
+# re_right, re_left = chunking(word[::-1], word_to_num(word[::-1]))
+# chunk_list = [left, right, re_left[::-1], re_right[::-1]]
+# for l in chunk_list:
+#     print(l)
+# print(optimizing(chunk_list))
